@@ -41,11 +41,11 @@ STOP::bar::1030`);
     const exists = fs.existsSync(jsonPath);
     assert.isFalse(exists);
 
-    exec(path.resolve(__dirname, `../bin/add-temp-timing-to-json ${jsonPath}`), {
-      env: Object.assign({
+    exec(`${path.resolve(__dirname, '../bin/add-temp-timing-to-json')} ${jsonPath}`, {
+      env: Object.assign({}, process.env, {
         TRAVIS_BUILD_NUMBER: 13,
         TMP_BENCHMARK_PATH: benchmarkPath
-      }, process.env)
+      })
     }, (error, stdout, stderr) => {
       const jsonContents = JSON.parse(fs.readFileSync(jsonPath));
       assert.deepEqual(jsonContents, expected);
@@ -97,10 +97,10 @@ STOP::bar2::2030`);
     assert.isTrue(exists);
 
     exec(path.resolve(__dirname, `../bin/add-temp-timing-to-json ${jsonPath}`), {
-      env: Object.assign({
+      env: Object.assign({}, process.env, {
         TRAVIS_BUILD_NUMBER: 15,
         TMP_BENCHMARK_PATH: benchmarkPath
-      }, process.env)
+      })
     }, (error, stdout, stderr) => {
       const jsonContents = JSON.parse(fs.readFileSync(jsonPath));
       assert.deepEqual(jsonContents, initial);

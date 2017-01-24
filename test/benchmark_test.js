@@ -13,9 +13,9 @@ describe('benchmark', (done) => {
     assert.isFalse(exists);
 
     exec(path.resolve(__dirname, `../bin/benchmark name ${command}`), {
-      env: Object.assign({
+      env: Object.assign({}, process.env, {
         TMP_BENCHMARK_PATH: tempPath
-      }, process.env)
+      })
     }, callback);
   }
 
