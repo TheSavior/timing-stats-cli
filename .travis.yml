@@ -1,0 +1,18 @@
+language: node_js
+script: yarn test
+node_js:
+- node
+- '6'
+- '5'
+cache: yarn
+notifications:
+  email: false
+deploy:
+  provider: npm
+  email: npm@eli-white.com
+  api_key:
+    secure: SLkpbfU7iiIaVlzp4hw1fKI6tLxTn0y/oLUURJStykjAFKMAbGIYYdb4Re5lQxM81rM1q6RbE7pz92Ol6S03DzhQyaj5jst8Op2bWhrQvQ4mwTp+TXYR4od/+fe3QFkcAMdA0eJtmu/aSZuUF5O5ajcUV8z1civVJRdvXwekvvLTT3KJMpjm1dMbOEgpg+v01UB1v1CgnH0iTP13ioBHeBa0oGwuOuO0gzmUo2R7qOP1xhb1lJiJ01786/FRCxfy60MnEqw4MJ0ScHnDx+prdrzlEUKyniA8Zmfb/qv4ulng1TTM/pPihj463H6O1MrPMElqMGz0kHxP8hSF2xoNJy3EUm7nodF23qkyKaMINLXG/GL+As5WwomVUJ1VSsGj9MFPoqs0Fkyrmh9okLIyGVGR0emeopROXrOJvef2jU9qzcXuf1/oFjC88basaOcFCauJ3gNsYRiESbbEx0a0LXzsEQ2+MDd7/ULkNeWxcvq6/AO7bA+MaMLWjFly0MZwGoh6IggnmkcVwfpHzrPjf0u+ii8S5/QdpyEYIizNFHw6+RLAT3IWiTxkE3NgNYffB0OJPTZqTo1n5sAZpUS63cbRnBXB6oC8jnLmkdKV58Y0b5wx4Hcf0ix6BTcu2bKW2lJc2rPn1S/7Pa/VMc66dlHZWNhc/SZyye1D5ADcNwE=
+  on:
+    tags: true
+    repo: TheSavior/timing-stats-cli
+    node: 'node'
