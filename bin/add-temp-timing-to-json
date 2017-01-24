@@ -13,9 +13,7 @@ if (!jsonPath) {
   process.exit(1);
 }
 
-
 const inputPath = cliHelpers.getTempBenchmarkPath();
-console.log(inputPath);
 const input = fs.readFileSync(inputPath);
 
 const stages = processTimingLines.process(input.toString());
