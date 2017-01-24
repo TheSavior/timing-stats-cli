@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const cliHelpers = require('../src/cli_helpers');
+const processTimingLines = require('../src/process_timing_lines');
+
+const jsonPath = process.argv[2];
+if (!jsonPath) {
+  console.error(`You must specify a path to a json file to append benchmarks to.`);
+  process.exit(1);
+}
+
+
+const inputPath = cliHelpers.getTempBenchmarkPath();
+console.log(inputPath);
+const input = fs.readFileSync(inputPath);
+
+const stages = processTimingLines.process(input.toString());
+
+const output = {
+  id: parseInt(process.env.TRAVIS_BUILD_NUMBER),
+  stages
+};
+
+let contents = '[]';
+
+try {
+  contents = fs.readFileSync(jsonPath).toString();
+} catch (e) {
+  // No JSON file yet
+}
+
+const result = JSON.parse(contents);
+result.push(output);
+
+console.log('writing', result, 'to', jsonPath);
+
+fs.writeFileSync(jsonPath, JSON.stringify(result));

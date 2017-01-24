@@ -4,11 +4,13 @@
   "main": "src/index.js",
   "license": "MIT",
   "bin": {
-    "benchmark": "./bin/benchmark"
+    "benchmark": "./bin/benchmark",
+    "add-temp-timing-to-json": "./bin/add-temp-timing-to-json"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   },
   "scripts": {
     "test": "mocha"

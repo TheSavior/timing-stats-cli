@@ -10,13 +10,13 @@ describe('benchmark', (done) => {
 
   function runCommand(command, callback) {
     const exists = fs.existsSync(tempPath);
-      assert.isFalse(exists);
+    assert.isFalse(exists);
 
-      exec(path.resolve(__dirname, `../bin/benchmark name ${command}`), {
-        env: Object.assign({
-          TMP_BENCHMARK_PATH: tempPath
-        }, process.env)
-      }, callback);
+    exec(path.resolve(__dirname, `../bin/benchmark name ${command}`), {
+      env: Object.assign({
+        TMP_BENCHMARK_PATH: tempPath
+      }, process.env)
+    }, callback);
   }
 
   function validateOutputStructure() {

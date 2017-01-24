@@ -5,11 +5,9 @@
 const spawn = require('child_process').spawn;
 const fs = require('fs');
 const path = require('path');
+const cliHelpers = require('../src/cli_helpers');
 
-let tmpPath = process.env.TMP_BENCHMARK_PATH;
-if (!tmpPath) {
-  tmpPath = path.join(process.cwd(), 'temp_benchmark_times.txt');
-}
+const tmpPath = cliHelpers.getTempBenchmarkPath();
 
 if (process.argv.length <= 3) {
   console.error(`You need to pass a task name and a command.
