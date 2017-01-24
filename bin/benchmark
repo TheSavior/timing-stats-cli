@@ -6,10 +6,9 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 const path = require('path');
 
-let jsonPath = process.env.TMP_BENCHMARK_PATH;
-if (!jsonPath) {
-  console.error(`The environment variable TMP_BENCHMARK_PATH needs to be set in order to benchmark commands`);
-  process.exit(1);
+let tmpPath = process.env.TMP_BENCHMARK_PATH;
+if (!tmpPath) {
+  tmpPath = path.join(process.cwd(), 'temp_benchmark_times.txt');
 }
 
 if (process.argv.length <= 3) {
@@ -42,7 +41,7 @@ childProcess.on('close', (code) => {
 });
 
 function writeToJson(str) {
-  fs.writeFileSync(jsonPath, `${str}\n`, {
+  fs.writeFileSync(tmpPath, `${str}\n`, {
     flag: 'a'
   });
 }

@@ -33,10 +33,10 @@ describe('benchmark', (done) => {
 
   beforeEach(() => {
     const tmpDir = fs.mkdtempSync('/tmp' + path.sep);
-    tempPath = path.join(tmpDir, 'benchmark_test.json');
+    tempPath = path.join(tmpDir, 'benchmark_test.txt');
   });
 
-  it('should append to json and run command', (done) => {
+  it('should append to txt and run command', (done) => {
     const exists = fs.existsSync(tempPath);
     assert.isFalse(exists);
 
