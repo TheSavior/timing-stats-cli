@@ -36,6 +36,4 @@ try {
 const result = JSON.parse(contents);
 result.push(output);
 
-console.log('writing', result, 'to', jsonPath);
-
 fs.writeFileSync(jsonPath, JSON.stringify(result));
