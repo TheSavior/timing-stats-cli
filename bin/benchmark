@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const spawn = require('child_process').spawn;
+const fs = require('fs');
+const path = require('path');
+
+let jsonPath = process.env.TMP_BENCHMARK_PATH;
+if (!jsonPath) {
+  console.error(`The environment variable TMP_BENCHMARK_PATH needs to be set in order to benchmark commands`);
+  process.exit(1);
+}
+
+if (process.argv.length <= 3) {
+  console.error(`You need to pass a task name and a command.
+For example 'benchmark test-task yarn test'`);
+  process.exit(1);
+}
+
+const taskName = process.argv[2];
+
+const beforeLog = `START::${taskName}::${Date.now()}`;
+
+const processArgs = process.argv.slice(3);
+
+const childProcess = spawn(processArgs[0], processArgs.slice(1), {
+  stdio: 'pipe',
+  env: process.env,
+  cwd: process.cwd()
+});
+
+childProcess.stdout.pipe(process.stdout);
+childProcess.stderr.pipe(process.stderr);
+
+childProcess.on('close', (code) => {
+  const afterLog = `STOP::${taskName}::${Date.now()}`;
+  writeToJson(beforeLog);
+  writeToJson(afterLog);
+
+  process.exit(code);
+});
+
+function writeToJson(str) {
+  fs.writeFileSync(jsonPath, `${str}\n`, {
+    flag: 'a'
+  });
+}
