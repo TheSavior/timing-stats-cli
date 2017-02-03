@@ -22,13 +22,10 @@ const beforeLog = `START::${taskName}::${Date.now()}`;
 const processArgs = process.argv.slice(3);
 
 const childProcess = spawn(processArgs[0], processArgs.slice(1), {
-  stdio: 'pipe',
+  stdio: 'inherit',
   env: process.env,
   cwd: process.cwd()
 });
-
-childProcess.stdout.pipe(process.stdout);
-childProcess.stderr.pipe(process.stderr);
 
 childProcess.on('close', (code) => {
   const afterLog = `STOP::${taskName}::${Date.now()}`;
